@@ -1,19 +1,4 @@
 /*
- Milestone 1: Mostrare la lista dei prodotti
-1. Parti dall’array products fornito:
-const products = [
-  { name: 'Mela', price: 0.5 },
-  { name: 'Pane', price: 1.2 },
-  { name: 'Latte', price: 1.0 },
-  { name: 'Pasta', price: 0.7 },
-];
-Crea un componente che mostra la lista dei prodotti.
-Per ogni prodotto, mostra:
-Nome
-Prezzo
-
-Obiettivo: Vedere un elenco leggibile di tutti i prodotti con nome e prezzo.
-
 📌 Milestone 2: Aggiungere prodotti al carrello
 Aggiungi uno stato locale addedProducts (inizialmente un array vuoto) per rappresentare i prodotti nel carrello.
 Per ogni prodotto della lista, aggiungi un bottone "Aggiungi al carrello":
@@ -38,10 +23,20 @@ Calcola il totale moltiplicando il prezzo per la quantità di ogni prodotto e so
 Obiettivo: Gestire l’aggiunta, la rimozione e il calcolo del totale del carrello in modo dinamico.
 */
 
+import ProductList from "./components/ProductList";
+
+const products = [
+  { name: 'Mela', price: 0.5 },
+  { name: 'Pane', price: 1.2 },
+  { name: 'Latte', price: 1.0 },
+  { name: 'Pasta', price: 0.7 },
+];
+
 function App() {
   
   return (
     <>
+    <ProductList products={products}/>
     </>
   )
 }
