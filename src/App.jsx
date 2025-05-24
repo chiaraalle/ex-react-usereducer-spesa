@@ -1,18 +1,4 @@
 /*
-📌 Milestone 2: Aggiungere prodotti al carrello
-Aggiungi uno stato locale addedProducts (inizialmente un array vuoto) per rappresentare i prodotti nel carrello.
-Per ogni prodotto della lista, aggiungi un bottone "Aggiungi al carrello":
-Al click del bottone, usa una funzione addToCart per:
-Aggiungere il prodotto al carrello se non è già presente, con una proprietà quantity = 1.
-Se il prodotto è già nel carrello, ignora l’azione.
-Sotto alla lista dei prodotti, mostra una lista dei prodotti nel carrello se addedProducts contiene almeno un elemento.
-Per ogni prodotto nel carrello, mostra:
-Nome
-Prezzo
-Quantità
-
-Obiettivo: L’utente può aggiungere prodotti al carrello e vedere una lista dei prodotti aggiunti.
-
 📌 Milestone 3: Modificare il carrello
 Al click successivo del bottone "Aggiungi al carrello", se il prodotto è già presente:
 Usa una funzione updateProductQuantity per incrementare la proprietà quantity del prodotto esistente.
