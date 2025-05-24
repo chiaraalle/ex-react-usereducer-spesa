@@ -1,18 +1,12 @@
 /*
-/*
-📌 Milestone 2: Aggiungere prodotti al carrello
-Aggiungi uno stato locale addedProducts (inizialmente un array vuoto) per rappresentare i prodotti nel carrello.
-Per ogni prodotto della lista, aggiungi un bottone "Aggiungi al carrello":
-Al click del bottone, usa una funzione addToCart per:
-Aggiungere il prodotto al carrello se non è già presente, con una proprietà quantity = 1.
-Se il prodotto è già nel carrello, ignora l’azione.
-Sotto alla lista dei prodotti, mostra una lista dei prodotti nel carrello se addedProducts contiene almeno un elemento.
-Per ogni prodotto nel carrello, mostra:
-Nome
-Prezzo
-Quantità
-
-Obiettivo: L’utente può aggiungere prodotti al carrello e vedere una lista dei prodotti aggiunti.
+📌 Milestone 3: Modificare il carrello
+Al click successivo del bottone "Aggiungi al carrello", se il prodotto è già presente:
+Usa una funzione updateProductQuantity per incrementare la proprietà quantity del prodotto esistente.
+Per ogni prodotto nel carrello, aggiungi un bottone "Rimuovi dal carrello":
+Al click, usa una funzione removeFromCart per rimuovere il prodotto dal carrello.
+Sotto alla lista del carrello, mostra il totale da pagare:
+Calcola il totale moltiplicando il prezzo per la quantità di ogni prodotto e somma tutti i risultati.
+Obiettivo: Gestire l’aggiunta, la rimozione e il calcolo del totale del carrello in modo dinamico.
 */
 
 import { FaShoppingCart } from "react-icons/fa";
@@ -26,10 +20,26 @@ const cartReducer = (state, action) => {
         // Controllo se il prodotto è già nel carrello
       const existingProduct = state.find(item => item.name === action.payload.name);
       if (existingProduct) {
-        return state; // Se esiste già,lo stato rimane immutato
+       return state.map(item => 
+                    item.name === action.payload.name 
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                ); // Se esiste già, aggiorno la quantità
       }
       // Se non esiste, lo aggiungo con quantity = 1
       return [...state, { ...action.payload, quantity: 1 }];
+
+       case 'UPDATE_QUANTITY':
+            return state.map(item => 
+                item.name === action.payload.name 
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+
+         case 'REMOVE_ITEMS':
+                return state.filter(item => item.name !== action.payload.name);
+        
+
     default:
       return state;
     }
@@ -43,6 +53,11 @@ function ProductList( { products } ){
     const handleAddToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
   };
+
+
+  const removeFromCart = (product) => {
+    dispatch({ type: 'REMOVE_ITEMS', payload: product });
+};
 
     return(
         <>
@@ -59,7 +74,7 @@ function ProductList( { products } ){
                 </li>
             ))}
         </ul>
-        <Cart cartItems={cartItems} />
+        <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
         </>
     )
 }
